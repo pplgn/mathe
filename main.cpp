@@ -1,4 +1,4 @@
-﻿#include <pch.h>
+#include <pch.h>
 
 int main() 
 {
@@ -6,7 +6,8 @@ int main()
     std::cout << "Gib die obere Grenze n ein: ";
     std::cin >> n;
 
-    if (n < 2) {
+    if (n < 2) 
+    {
         std::cout << "Keine Primzahlen <= " << n << std::endl;
         return 0;
     }
@@ -17,10 +18,13 @@ int main()
     primzahl[1] = false;
 
     // sieb durchführen
-    for (int p = 2; p <= std::sqrt(n); ++p) {
-        if (primzahl[p]) {
+    for (int p = 2; p <= std::sqrt(n); ++p) 
+    {
+        if (primzahl[p]) 
+        {
             // alle vielfachen von p streichen
-            for (int k = p * p; k <= n; k += p) {
+            for (int k = p * p; k <= n; k += p) 
+            {
                 primzahl[k] = false;
             }
         }
@@ -28,8 +32,10 @@ int main()
 
     // Ausgabe
     std::cout << "Primzahlen bis " << n << ":\n";
-    for (int i = 2; i <= n; ++i) {
-        if (primzahl[i]) {
+    for (int i = 2; i <= n; ++i) 
+    {
+        if (primzahl[i]) 
+        {
             std::cout << i << " ";
         }
     }
@@ -37,3 +43,4 @@ int main()
 
     return 0;
 }
+
