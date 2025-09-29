@@ -1,39 +1,27 @@
-﻿#include <pch.h>
-
-int main() 
+int main()
 {
-    int n;
-    std::cout << "Gib die obere Grenze n ein: ";
-    std::cin >> n;
+	int numPoints;
+	std::cout << "geben sie die anzahl der zufallspunkte ein: ";
+	std::cin >> numPoints;
 
-    if (n < 2) {
-        std::cout << "Keine Primzahlen <= " << n << std::endl;
-        return 0;
-    }
+	int pointsInCircle = 0;
 
-    // array mit "true" initialisieren
-    std::vector<bool> primzahl(n + 1, true);
-    primzahl[0] = false;
-    primzahl[1] = false;
+	srand(time(0));
 
-    // sieb durchführen
-    for (int p = 2; p <= std::sqrt(n); ++p) {
-        if (primzahl[p]) {
-            // alle vielfachen von p streichen
-            for (int k = p * p; k <= n; k += p) {
-                primzahl[k] = false;
-            }
-        }
-    }
+	for (int i = 0; i < numPoints; ++i)
+	{
+		double x = static_cast<double>(rand()) / RAND_MAX;
+		double y = static_cast<double>(rand()) / RAND_MAX;
 
-    // Ausgabe
-    std::cout << "Primzahlen bis " << n << ":\n";
-    for (int i = 2; i <= n; ++i) {
-        if (primzahl[i]) {
-            std::cout << i << " ";
-        }
-    }
-    std::cout << std::endl;
+		if (x * x + y * y <= 1.0) 
+		{
+			pointsInCircle++;
+		}
+	}
 
-    return 0;
+	double pi_estimate = 4.0 * static_cast<double>(pointsInCircle) / numPoints;
+
+	std::cout << "geschaetzter wert für pi: " << pi_estimate << std::endl;
+
+	return 0;
 }
