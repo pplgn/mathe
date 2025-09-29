@@ -1,39 +1,26 @@
-﻿#include <pch.h>
+﻿#include "pch.h"
 
 int main() 
 {
-    int n;
-    std::cout << "Gib die obere Grenze n ein: ";
-    std::cin >> n;
+    double radius = 1.0;
+    int num_sides = 6; // sechseck
+    double pi_approx = 0.0;
 
-    if (n < 2) {
-        std::cout << "Keine Primzahlen <= " << n << std::endl;
-        return 0;
+    for (int i = 0; i < 10; ++i)  // 10 iterationen für anzahl nachkommastellen
+    { 
+        double perimeter_inscribed = num_sides * 2 * radius * sin(M_PI / num_sides);
+        double perimeter_circumscribed = num_sides * 2 * radius * tan(M_PI / num_sides);
+
+        // annäherung von pi aus dem inneren und äußeren polygon
+        double pi_in = perimeter_inscribed / (2.0 * radius);
+        double pi_out = perimeter_circumscribed / (2.0 * radius);
+
+        pi_approx = (pi_in + pi_out) / 2.0; // durchschnitt annäherung
+
+        std::cout << "Anzahl der Seiten: " << num_sides << ", Näherung von Pi: " << pi_approx << std::endl;
+
+        num_sides *= 2; // verdoppelt seiten nach jedem durchlauf
     }
-
-    // array mit "true" initialisieren
-    std::vector<bool> primzahl(n + 1, true);
-    primzahl[0] = false;
-    primzahl[1] = false;
-
-    // sieb durchführen
-    for (int p = 2; p <= std::sqrt(n); ++p) {
-        if (primzahl[p]) {
-            // alle vielfachen von p streichen
-            for (int k = p * p; k <= n; k += p) {
-                primzahl[k] = false;
-            }
-        }
-    }
-
-    // Ausgabe
-    std::cout << "Primzahlen bis " << n << ":\n";
-    for (int i = 2; i <= n; ++i) {
-        if (primzahl[i]) {
-            std::cout << i << " ";
-        }
-    }
-    std::cout << std::endl;
 
     return 0;
 }
